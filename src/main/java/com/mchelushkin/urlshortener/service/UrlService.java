@@ -42,8 +42,9 @@ public class UrlService {
     public List<UrlStatistics> getStatistics(int pageNumber, int count) {
         Page<Url> sortedUrls = urlRepository.findAll(PageRequest
                 .of(pageNumber, count, Sort.by("redirectCounter").descending()));
+        int baseRating = pageNumber * count + 1;
         return EntryStream.of(sortedUrls.getContent())
-                .mapKeys(i -> i + 1)
+                .mapKeys(i -> baseRating + i)
                 .mapKeyValue(UrlStatistics::new).toList();
     }
 

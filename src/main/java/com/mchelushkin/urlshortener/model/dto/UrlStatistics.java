@@ -10,8 +10,10 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UrlStatistics {
 
+    private static final String LINK_PREFIX = "/l/";
+
     public UrlStatistics(long rank, Url url) {
-        this.link = url.getUrl();
+        this.link = LINK_PREFIX + url.getUrl();
         this.original = url.getOriginUrl();
         this.redirects = url.getRedirectCounter();
         this.rank = rank;

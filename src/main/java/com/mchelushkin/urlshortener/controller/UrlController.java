@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @AllArgsConstructor
@@ -26,6 +27,8 @@ public class UrlController {
         return urlService.createShortUrl(response.getOriginal());
     }
 
+    //  Redirecting doesn't work in swagger
+    @ApiIgnore()
     @GetMapping("/l/{shortUrl}")
     ModelAndView redirect(@PathVariable String shortUrl) {
         String originUrl = urlService.getOriginUrlForRedirect(shortUrl);
